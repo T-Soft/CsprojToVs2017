@@ -10,7 +10,7 @@ namespace Project2015To2017.Transformations
 {
     internal sealed class NugetPackageTransformation : ITransformation
     {
-        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
         {
             var nuspecFiles = projectFolder
                 .EnumerateFiles("*.nuspec", SearchOption.AllDirectories)

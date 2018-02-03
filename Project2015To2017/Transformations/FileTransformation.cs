@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Project2015To2017.Definition;
-using System.Linq;
 
-namespace Project2015To2017
+namespace Project2015To2017.Transformations
 {
     internal sealed class FileTransformation : ITransformation
     {
@@ -26,7 +26,7 @@ namespace Project2015To2017
             "XamlAppDef"
         };
 
-        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
         {
             XNamespace nsSys = "http://schemas.microsoft.com/developer/msbuild/2003";
             var itemGroups = projectFile

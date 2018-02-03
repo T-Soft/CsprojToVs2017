@@ -10,7 +10,7 @@ namespace Project2015To2017.Transformations
 {
     internal sealed class PackageReferenceTransformation : ITransformation
     {
-        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
         {
             var packagesConfig = projectFolder.GetFiles("packages.config", SearchOption.TopDirectoryOnly);
             if (packagesConfig == null || packagesConfig.Length == 0)

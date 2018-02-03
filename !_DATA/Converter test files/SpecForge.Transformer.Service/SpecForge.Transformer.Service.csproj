@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6E18983B-5B1B-4EB7-BC72-606463020C52}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SpecForge.Transformer.Service</RootNamespace>
+    <RootNamespace>SpecForge.Service</RootNamespace>
     <AssemblyName>SpecForge.Transformer.Service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

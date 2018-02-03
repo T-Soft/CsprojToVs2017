@@ -9,7 +9,7 @@ namespace Project2015To2017.Transformations
 {
     internal sealed class AssemblyReferenceTransformation : ITransformation
     {
-        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+        public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
         {
             XNamespace nsSys = "http://schemas.microsoft.com/developer/msbuild/2003";
 

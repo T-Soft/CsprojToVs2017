@@ -32,7 +32,7 @@ namespace Project2015To2017.Transformations
 			["AssemblyInformationalVersion"] = typeof(AssemblyInformationalVersionAttribute)		
 		};
 		
-		public async Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+		public async Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
 		{
 			var assemblyInfoFiles = projectFolder
 				.EnumerateFiles("AssemblyInfo.cs", SearchOption.AllDirectories)

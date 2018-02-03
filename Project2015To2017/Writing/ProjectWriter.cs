@@ -9,6 +9,13 @@ namespace Project2015To2017.Writing
 {
 	internal sealed class ProjectWriter
 	{
+		private Settings _settings;
+
+		public ProjectWriter(Settings settings)
+		{
+			_settings = settings;
+		}
+
 		public void Write(Project project, FileInfo outputFile)
 		{
 			var projectNode = CreateXml(project, outputFile);
@@ -93,7 +100,7 @@ namespace Project2015To2017.Writing
 			return projectNode;
 		}
 
-		private static XElement MakeAssemblyReference(AssemblyReference assemblyReference)
+		private XElement MakeAssemblyReference(AssemblyReference assemblyReference)
 		{
 			var output = new XElement("Reference", new XAttribute("Include", assemblyReference.Include));
 
@@ -116,16 +123,19 @@ namespace Project2015To2017.Writing
 
 			return output;
 		}
-
-		private static XElement RemoveAllNamespaces(XElement e)
+		
+		private  XElement RemoveAllNamespaces(XElement e)
 		{
-			return new XElement(e.Name.LocalName,
-			  (from n in e.Nodes()
-			   select ((n is XElement) ? RemoveAllNamespaces((XElement)n) : n)),
-				  (e.HasAttributes) ?
-					(from a in e.Attributes()
-					 where (!a.IsNamespaceDeclaration)
-					 select new XAttribute(a.Name.LocalName, a.Value)) : null);
+			return new XElement(
+				e.Name.LocalName,
+				(e.Nodes()
+					.Select(
+						n => ((n is XElement)
+							? RemoveAllNamespaces((XElement) n)
+							: n))),
+				(e.HasAttributes)
+					? (e.Attributes().Where(a => (!a.IsNamespaceDeclaration)).Select(a => new XAttribute(a.Name.LocalName, a.Value)))
+					: null);
 		}
 
 		private bool IsDefaultIncludedAssemblyReference(string assemblyReference)
@@ -206,25 +216,36 @@ namespace Project2015To2017.Writing
 				return;
 			}
 
-			var attributes = new[]
+			XElement[] childNodes = null;
+			if (!_settings.IsUseAssemblyInfoFile)
 			{
-				new KeyValuePair<string, string>("GenerateAssemblyTitleAttribute", assemblyAttributes.Title),
-				new KeyValuePair<string, string>("GenerateAssemblyCompanyAttribute", assemblyAttributes.Company),
-				new KeyValuePair<string, string>("GenerateAssemblyDescriptionAttribute", assemblyAttributes.Description),
-				new KeyValuePair<string, string>("GenerateAssemblyProductAttribute", assemblyAttributes.Product),
-				new KeyValuePair<string, string>("GenerateAssemblyCopyrightAttribute", assemblyAttributes.Copyright),
-				new KeyValuePair<string, string>("GenerateAssemblyInformationalVersionAttribute", assemblyAttributes.InformationalVersion),
-				new KeyValuePair<string, string>("GenerateAssemblyVersionAttribute", assemblyAttributes.Version),
-				new KeyValuePair<string, string>("GenerateAssemblyFileVersionAttribute", assemblyAttributes.FileVersion),
-				new KeyValuePair<string, string>("GenerateAssemblyConfigurationAttribute", assemblyAttributes.Configuration)
-			};
+				var attributes = new[]
+				{
+					new KeyValuePair<string, string>("GenerateAssemblyTitleAttribute", assemblyAttributes.Title),
+					new KeyValuePair<string, string>("GenerateAssemblyCompanyAttribute", assemblyAttributes.Company),
+					new KeyValuePair<string, string>("GenerateAssemblyDescriptionAttribute", assemblyAttributes.Description),
+					new KeyValuePair<string, string>("GenerateAssemblyProductAttribute", assemblyAttributes.Product),
+					new KeyValuePair<string, string>("GenerateAssemblyCopyrightAttribute", assemblyAttributes.Copyright),
+					new KeyValuePair<string, string>(
+						"GenerateAssemblyInformationalVersionAttribute",
+						assemblyAttributes.InformationalVersion),
+					new KeyValuePair<string, string>("GenerateAssemblyVersionAttribute", assemblyAttributes.Version),
+					new KeyValuePair<string, string>("GenerateAssemblyFileVersionAttribute", assemblyAttributes.FileVersion),
+					new KeyValuePair<string, string>("GenerateAssemblyConfigurationAttribute", assemblyAttributes.Configuration)
+				};
 
-			var childNodes = attributes
-				.Where(x => !string.IsNullOrWhiteSpace(x.Value))
-				.Select(x => new XElement(x.Key, "false"))
-				.ToArray();
+				childNodes = attributes
+					.Where(x => !string.IsNullOrWhiteSpace(x.Value))
+					.Select(x => new XElement(x.Key, "false"))
+					.ToArray();
+			}
+			else
+			{
+				childNodes = assemblyAttributes.GetAttributes().Where(kv => !string.IsNullOrEmpty(kv.Value))
+					.Select(kv => new XElement(kv.Key, kv.Value)).ToArray();
+			}
 
-			if (childNodes.Length == 0)
+			if (childNodes == null || childNodes.Length == 0)
 			{
 				mainPropertyGroup.Add(new XElement("GenerateAssemblyInfo", "false"));
 			}
@@ -232,6 +253,7 @@ namespace Project2015To2017.Writing
 			{
 				mainPropertyGroup.Add(childNodes);
 			}
+			
 		}
 
 		private void AddIfNotNull(XElement node, string elementName, string value)
@@ -246,6 +268,12 @@ namespace Project2015To2017.Writing
 		{
 			if (targetFrameworks == null)
 			{
+				return;
+			}
+
+			if (_settings.IsMigrateToNetStandard)
+			{
+				AddIfNotNull(mainPropertyGroup, "TargetFramework", "netstandard2.0");
 				return;
 			}
 

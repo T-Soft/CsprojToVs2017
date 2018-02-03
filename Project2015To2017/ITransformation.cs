@@ -7,6 +7,6 @@ namespace Project2015To2017
 {
     internal interface ITransformation
     {
-        Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition);
+        Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings);
     }
 }

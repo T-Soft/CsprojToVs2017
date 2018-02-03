@@ -9,7 +9,7 @@ namespace Project2015To2017.Transformations
 {
 	internal sealed class RemovePackageAssemblyReferencesTransformation : ITransformation
 	{
-		public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition)
+		public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
 		{
 			if (definition.PackageReferences == null || definition.PackageReferences.Count == 0)
 			{
