@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project2015To2017;
 using System.Collections.Generic;
+using Project2015To2017.Transformations;
 
 namespace Project2015To2017Tests
 {

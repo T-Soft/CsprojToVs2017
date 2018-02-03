@@ -4,6 +4,7 @@ using Project2015To2017.Definition;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Project2015To2017.Transformations;
 
 namespace Project2015To2017Tests
 {

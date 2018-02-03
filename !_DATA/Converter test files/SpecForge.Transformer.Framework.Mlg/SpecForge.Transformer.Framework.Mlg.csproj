@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup Label="Globals">
+		<SccProjectName>SAK</SccProjectName>
+		<SccProvider>SAK</SccProvider>
+		<SccAuxPath>SAK</SccAuxPath>
+		<SccLocalPath>SAK</SccLocalPath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Description>??? Roman Pusenkov to provide</Description>
+		<Copyright>Copyright © CNET Content Solutions 2017</Copyright>
+		<Company>CNET Content Solutions</Company>
+		<Authors>CNET Content Solutions</Authors>
+		<RootNamespace>SpecForge.Transformer.Mlg</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\Debug\netstandard2.0\SpecForge.Transformer.Framework.Mlg.xml</DocumentationFile>
+		<NoWarn>1701;1702;1705;1591</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Release\netstandard2.0\SpecForge.Transformer.Framework.Mlg.xml</DocumentationFile>
+		<NoWarn>1701;1702;1705;1591</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.6.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.6.1" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+		<PackageReference Include="SpecForge.Core" Version="18.1.31.3" />
+		<PackageReference Include="SpecForge.Core.Server" Version="18.1.31.4" />
+		<PackageReference Include="SpecForge.DataAdapter.Core" Version="18.1.31.4" />
+		<PackageReference Include="SpecForge.DataAdapter.DataSource.Core" Version="18.1.31.5" />
+		<PackageReference Include="SpecForge.Model.DataSource" Version="18.1.31.3" />
+		<PackageReference Include="SpecForge.Storage.Core" Version="18.2.1.2" />
+		<PackageReference Include="SpecForge.Transformer.Core" Version="18.2.1.2" />
+		<PackageReference Include="SpecForge.Transformer.Core.DataSource" Version="18.2.1.1" />
+		<PackageReference Include="SpecForge.Transformer.Framework.Core" Version="18.2.1.1" />
+		<PackageReference Include="SpecForge.Transformer.Framework.Mlg.Communication" Version="18.2.1.1" />
+		<PackageReference Include="SpecForge.Transformer.Server.Core" Version="18.2.1.8" />
+		<PackageReference Include="SpecForge.Transformer.Server.Executor.DataSource" Version="18.2.1.4" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\SpecForge.Core.Server\SpecForge.Core.Server.csproj" />
+	  <ProjectReference Include="..\SpecForge.Core\SpecForge.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.DataAdapter.Core\SpecForge.DataAdapter.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Core\SpecForge.DataAdapter.DataSource.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.Model.DataSource\SpecForge.Model.DataSource.csproj" />
+	  <ProjectReference Include="..\SpecForge.Storage.Core\SpecForge.Storage.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Core.DataSource\SpecForge.Transformer.Core.DataSource.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Core\SpecForge.Transformer.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Framework.Core\SpecForge.Transformer.Framework.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Framework.Mlg.Communication\SpecForge.Transformer.Framework.Mlg.Communication.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Server.Core\SpecForge.Transformer.Server.Core.csproj" />
+	  <ProjectReference Include="..\SpecForge.Transformer.Server.Executor.DataSource\SpecForge.Transformer.Server.Executor.DataSource.csproj" />
+	</ItemGroup>
+</Project>

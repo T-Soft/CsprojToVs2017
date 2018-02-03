@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E18983B-5B1B-4EB7-BC72-606463020C52}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SpecForge.Transformer.Service</RootNamespace>
+    <AssemblyName>SpecForge.Transformer.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.1.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.Owin.4.0.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.Core, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Core.1.1.2\lib\net45\CacheManager.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.Microsoft.Extensions.Caching.Memory, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Microsoft.Extensions.Caching.Memory.1.1.2\lib\net451\CacheManager.Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.SystemRuntimeCaching, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.SystemRuntimeCaching.1.1.2\lib\net45\CacheManager.SystemRuntimeCaching.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=5.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.5.5.0\lib\net46\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Helix.Data, Version=17.11.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Helix.Data.17.11.4.2\lib\net40\Helix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Helix.Data.Core, Version=17.11.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Helix.Data.Core.17.11.1.2\lib\net40\Helix.Data.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Helix.Data.Core.Sql, Version=17.11.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Helix.Data.Core.Sql.17.11.1.1\lib\net40\Helix.Data.Core.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="Helix.Data.Core.Web, Version=17.11.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Helix.Data.Core.Web.17.11.1.1\lib\net40\Helix.Data.Core.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.6.1\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.2.6.1\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.3.1.0\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.3.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Services3.3.0.0.0\lib\net20\Microsoft.Web.Services3.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NCalc, Version=3.5.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoreCLR-NCalc.2.1.3\lib\net45\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=3.0.2.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.3.0.2\lib\net452\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Rp.Core, Version=18.1.29.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rp.Core.18.1.29.2\lib\netstandard2.0\Rp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.6.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Elasticsearch, Version=5.7.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Elasticsearch.5.7.0\lib\net45\Serilog.Sinks.Elasticsearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.PeriodicBatching, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.PeriodicBatching.2.1.1\lib\net45\Serilog.Sinks.PeriodicBatching.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.2.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.FileVersionInfo.4.3.0\lib\net46\System.Diagnostics.FileVersionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.StackTrace.4.3.0\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reflection.Metadata, Version=1.4.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.1.5.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.8.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.SelfHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.5.2.3\lib\net45\System.Web.Http.SelfHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.4.3.0\lib\net46\System.Xml.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.ConsoleApplication.CoreLibrary, Version=17.10.28.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortex.ConsoleApplication.CoreLibrary.17.10.28.1\lib\net20\Vortex.ConsoleApplication.CoreLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Utilities.Configuration, Version=17.12.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortex.Utilities.Configuration.17.12.4.2\lib\netstandard2.0\Vortex.Utilities.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Utilities.Core, Version=17.12.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortex.Utilities.Core.17.12.4.1\lib\netstandard2.0\Vortex.Utilities.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.Utilities.Data, Version=17.12.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortex.Utilities.Data.17.12.4.2\lib\netstandard2.0\Vortex.Utilities.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Vortex.WindowsServiceApplication.CoreLibrary, Version=17.10.14.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vortex.WindowsServiceApplication.CoreLibrary.17.10.14.1\lib\net20\Vortex.WindowsServiceApplication.CoreLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="VXKnowledgeDataSource, Version=17.11.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VXKnowledgeDataSource.17.11.4.1\lib\net20\VXKnowledgeDataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="VXSqlAdapter, Version=17.10.14.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VXSqlAdapter.17.10.14.1\lib\net20\VXSqlAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="VXStorage, Version=17.10.7.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VXStorage.17.10.7.1\lib\net20\VXStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="VXSystem, Version=17.10.7.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VXSystem.17.10.7.1\lib\net20\VXSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="VXWebAdapter, Version=17.10.14.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VXWebAdapter.17.10.14.1\lib\net20\VXWebAdapter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ClearCacheController.cs" />
+    <Compile Include="Controllers\EvaluatorController.cs" />
+    <Compile Include="Controllers\FrameworkDocumentationController.cs" />
+    <Compile Include="Controllers\TransformController.cs" />
+    <Compile Include="Diagnostics\FileLogWriterSlim.cs" />
+    <Compile Include="Diagnostics\SerilogLogWriter.cs" />
+    <Compile Include="Diagnostics\TpdMonitorLogger.cs" />
+    <Compile Include="Evaluator\EvaluatorTemplateStorage.cs" />
+    <Compile Include="Evaluator\EvaluationPerformer.cs" />
+    <Compile Include="Evaluator\EvaluatorTransformerLoader.cs" />
+    <Compile Include="ExceptionService\ResilientWindowsServiceExceptionService.cs" />
+    <Compile Include="Helpers\ExecutorResponseHelper.cs" />
+    <Compile Include="Helpers\LoaderResponseHelper.cs" />
+    <Compile Include="Helpers\LoggerHelper.cs" />
+    <Compile Include="Helpers\ProductDataHelper.cs" />
+    <Compile Include="Infrastructure\AccHelper.cs" />
+    <Compile Include="Infrastructure\AlternativeCategoriesCacheStorage.cs" />
+    <Compile Include="Infrastructure\ClearCacheHelper.cs" />
+    <Compile Include="Infrastructure\EvaluatorScriptWrapperFactorySettingsFactory.cs" />
+    <Compile Include="Infrastructure\Initializer.cs" />
+    <Compile Include="Infrastructure\SerilogConfigurationFactory.cs" />
+    <Compile Include="Infrastructure\Scheduler\ActionJob.cs" />
+    <Compile Include="Infrastructure\TransformationPerformer.cs" />
+    <Compile Include="Infrastructure\TransformationSettings.cs" />
+    <Compile Include="Infrastructure\TransformerLoaderRequestFactory.cs" />
+    <Compile Include="Infrastructure\TransformerService.cs" />
+    <Compile Include="Installer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Installer.Designer.cs">
+      <DependentUpon>Installer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IoC\AutofacConfig.cs" />
+    <Compile Include="IoC\Registrator.cs" />
+    <Compile Include="IoC\RegistratorFirst.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SpecForge.Transformer.Service.exe.config.default">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpecForge.Application.Core\SpecForge.Application.Core.csproj">
+      <Project>{45c7f08a-1a5e-43f9-aac1-762b66c99744}</Project>
+      <Name>SpecForge.Application.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Core.Server\SpecForge.Core.Server.csproj">
+      <Project>{e50265ee-f1d5-454a-b8fa-8c32fc31a601}</Project>
+      <Name>SpecForge.Core.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Core\SpecForge.Core.csproj">
+      <Project>{0bbc7261-a066-4824-84b8-aeab89beef1d}</Project>
+      <Name>SpecForge.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.Core\SpecForge.DataAdapter.Core.csproj">
+      <Project>{4e2eb598-0e39-4569-a2c2-b30e0b45defc}</Project>
+      <Name>SpecForge.DataAdapter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Core\SpecForge.DataAdapter.DataSource.Core.csproj">
+      <Project>{f9c7701d-74f9-48b9-9468-37fe0eda3397}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Core\SpecForge.DataAdapter.DataSource.Server.Core.csproj">
+      <Project>{4e259550-9316-4753-9f6b-47baf1c29c26}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Helix\SpecForge.DataAdapter.DataSource.Server.Helix.csproj">
+      <Project>{c85a7692-674c-44ee-8af0-c0446ef1e7de}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Helix</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Mdb\SpecForge.DataAdapter.DataSource.Server.Mdb.csproj">
+      <Project>{2487744c-480b-441d-b23d-aa5265d0bbc0}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Mdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Smdb\SpecForge.DataAdapter.DataSource.Server.Smdb.csproj">
+      <Project>{ad5cec91-0dd8-448c-ba00-f6a4a6e1eadc}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Smdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Tpd\SpecForge.DataAdapter.DataSource.Server.Tpd.csproj">
+      <Project>{1cff8710-0827-458a-a82e-ebed52739489}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Tpd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server.Uncdb\SpecForge.DataAdapter.DataSource.Server.Uncdb.csproj">
+      <Project>{dd6eebcc-6bf7-44cb-9c36-cdc106c849f4}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server.Uncdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.DataSource.Server\SpecForge.DataAdapter.DataSource.Server.csproj">
+      <Project>{bff42bda-ebe5-46ba-88e6-6f7bd6f4258f}</Project>
+      <Name>SpecForge.DataAdapter.DataSource.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.DataAdapter.Server.Core\SpecForge.DataAdapter.Server.Core.csproj">
+      <Project>{f57be714-57c4-4302-84af-3a5995a62456}</Project>
+      <Name>SpecForge.DataAdapter.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.IoC.Autofac\SpecForge.IoC.Autofac.csproj">
+      <Project>{c7bb863f-a3a5-4814-a6b5-a70cebf49201}</Project>
+      <Name>SpecForge.IoC.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Model.DataSource\SpecForge.Model.DataSource.csproj">
+      <Project>{99ba2a76-b248-4003-a961-20a0488bde7d}</Project>
+      <Name>SpecForge.Model.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Scripts\SpecForge.Scripts.csproj">
+      <Project>{6e6ace55-c8b3-4734-aeb1-a64e26a0723f}</Project>
+      <Name>SpecForge.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Storage.Core\SpecForge.Storage.Core.csproj">
+      <Project>{5ed8f575-b99a-4837-b032-8776c6b6fda3}</Project>
+      <Name>SpecForge.Storage.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Storage.Server\SpecForge.Storage.Server.csproj">
+      <Project>{5f4ba146-c8e1-4961-906d-2e5998fab486}</Project>
+      <Name>SpecForge.Storage.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Core.DataSource\SpecForge.Transformer.Core.DataSource.csproj">
+      <Project>{8a9863c2-5162-43df-ba05-c68ae2d32136}</Project>
+      <Name>SpecForge.Transformer.Core.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Core\SpecForge.Transformer.Core.csproj">
+      <Project>{bfa0ea63-4ae5-419e-ad39-85223469c99d}</Project>
+      <Name>SpecForge.Transformer.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Bumblebee.Communication\SpecForge.Transformer.Framework.Bumblebee.Communication.csproj">
+      <Project>{083f4cb3-a77d-4be1-b0f5-7a83e63eadea}</Project>
+      <Name>SpecForge.Transformer.Framework.Bumblebee.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Bumblebee\SpecForge.Transformer.Framework.Bumblebee.csproj">
+      <Project>{920b45d4-9d15-4c21-9b55-bc9b4a29a9bc}</Project>
+      <Name>SpecForge.Transformer.Framework.Bumblebee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Core\SpecForge.Transformer.Framework.Core.csproj">
+      <Project>{65a11f2d-3874-4197-a8d4-fe8c7631f82b}</Project>
+      <Name>SpecForge.Transformer.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Mlg.Communication\SpecForge.Transformer.Framework.Mlg.Communication.csproj">
+      <Project>{20ac39ee-071e-4629-a928-3d51a78bb10e}</Project>
+      <Name>SpecForge.Transformer.Framework.Mlg.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Mlg\SpecForge.Transformer.Framework.Mlg.csproj">
+      <Project>{d320c98e-9622-4d23-b709-de0aa20ce659}</Project>
+      <Name>SpecForge.Transformer.Framework.Mlg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Templex.Communication\SpecForge.Transformer.Framework.Templex.Communication.csproj">
+      <Project>{e66d4f81-3695-4c3e-b79c-624b9d2be195}</Project>
+      <Name>SpecForge.Transformer.Framework.Templex.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Framework.Templex\SpecForge.Transformer.Framework.Templex.csproj">
+      <Project>{79f6679a-958b-4a5f-970d-ece4423d456b}</Project>
+      <Name>SpecForge.Transformer.Framework.Templex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Core\SpecForge.Transformer.Server.Core.csproj">
+      <Project>{5574dfba-f4ce-4b84-844c-bb96c16c74e7}</Project>
+      <Name>SpecForge.Transformer.Server.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Executor.DataSource\SpecForge.Transformer.Server.Executor.DataSource.csproj">
+      <Project>{7a453cd0-a773-4adc-bcee-e0b5de0b1781}</Project>
+      <Name>SpecForge.Transformer.Server.Executor.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Executor\SpecForge.Transformer.Server.Executor.csproj">
+      <Project>{5252e844-506d-4c64-a715-b76f8a2f58f7}</Project>
+      <Name>SpecForge.Transformer.Server.Executor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Loader.DataSource\SpecForge.Transformer.Server.Loader.DataSource.csproj">
+      <Project>{aa60680b-dfc4-4c2d-afbd-692e06b7e92c}</Project>
+      <Name>SpecForge.Transformer.Server.Loader.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Loader\SpecForge.Transformer.Server.Loader.csproj">
+      <Project>{89975f3b-b3fc-4179-935e-3c0cb9b0e82d}</Project>
+      <Name>SpecForge.Transformer.Server.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server.Modification.Core\SpecForge.Transformer.Server.Modification.Core.csproj">
+      <Project>{7bf919f9-8138-4abf-9720-6e47f947d190}</Project>
+      <Name>SpecForge.Transformer.Server.Modification.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.Server\SpecForge.Transformer.Server.csproj">
+      <Project>{02d4f61c-fefd-43b0-9085-2f8687a1defb}</Project>
+      <Name>SpecForge.Transformer.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Transformer.WebService.Core\SpecForge.Transformer.WebService.Core.csproj">
+      <Project>{0b9e717a-ecd8-47e8-9974-aa05cb258221}</Project>
+      <Name>SpecForge.Transformer.WebService.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.UsmConverter.Core\SpecForge.UsmConverter.Core.csproj">
+      <Project>{deb98c6f-d866-40d4-bfae-4a30024bed3c}</Project>
+      <Name>SpecForge.UsmConverter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.UsmConverter.Server\SpecForge.UsmConverter.Server.csproj">
+      <Project>{acdc417f-5012-493d-bdaf-8d27a1eee0a3}</Project>
+      <Name>SpecForge.UsmConverter.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Validation.Common\SpecForge.Validation.Common.csproj">
+      <Project>{ca532a25-26b3-495a-83ef-63289aec1013}</Project>
+      <Name>SpecForge.Validation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Validation.Core\SpecForge.Validation.Core.csproj">
+      <Project>{9f21f9ee-b1ed-41f6-8bbd-592a97976eac}</Project>
+      <Name>SpecForge.Validation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Validation.Mlg\SpecForge.Validation.Mlg.csproj">
+      <Project>{7a553546-f5af-4e04-96aa-c53a8fc847e4}</Project>
+      <Name>SpecForge.Validation.Mlg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Validation.Templex\SpecForge.Validation.Templex.csproj">
+      <Project>{2b9229bc-0718-4f83-bb66-228ac3cc0c74}</Project>
+      <Name>SpecForge.Validation.Templex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpecForge.Validation.Usm\SpecForge.Validation.Usm.csproj">
+      <Project>{fa672544-c332-414d-8304-f84bc55bf616}</Project>
+      <Name>SpecForge.Validation.Usm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+</Project>

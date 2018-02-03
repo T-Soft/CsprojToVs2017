@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Project2015To2017.Transformations;
 
 [assembly: InternalsVisibleTo("Project2015To2017Tests")]
 

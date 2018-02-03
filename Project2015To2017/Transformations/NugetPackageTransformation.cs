@@ -1,12 +1,12 @@
-﻿using Project2015To2017.Definition;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Project2015To2017.Definition;
 
-namespace Project2015To2017
+namespace Project2015To2017.Transformations
 {
     internal sealed class NugetPackageTransformation : ITransformation
     {
