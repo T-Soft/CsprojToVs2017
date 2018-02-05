@@ -1,15 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project2015To2017.Writing;
+using Project2015To2017Tests.Helpers;
 
 namespace Project2015To2017Tests
 {
-    [TestClass]
-    public class ProjectWriterTest
+	[TestClass]
+	public class ProjectWriterTest
 	{
 		[TestMethod]
 		public void GenerateAssemblyInfoOnNothingSpecifiedTest()
 		{
-			var writer = new ProjectWriter();
+			var writer = new ProjectWriter(SettingsFactory.Create());
 			var xmlNode = writer.CreateXml(new Project2015To2017.Definition.Project
 			{
 				AssemblyAttributes = new Project2015To2017.Definition.AssemblyAttributes()
@@ -23,7 +24,7 @@ namespace Project2015To2017Tests
 		[TestMethod]
 		public void GeneratesAssemblyInfoNodesWhenSpecifiedTest()
 		{
-			var writer = new ProjectWriter();
+			var writer = new ProjectWriter(SettingsFactory.Create());
 			var xmlNode = writer.CreateXml(new Project2015To2017.Definition.Project
 			{
 				AssemblyAttributes = new Project2015To2017.Definition.AssemblyAttributes

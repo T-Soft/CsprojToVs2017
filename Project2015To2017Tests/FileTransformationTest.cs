@@ -5,6 +5,8 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Project2015To2017.Transformations;
+using Project2015To2017Tests.Helpers;
 
 namespace Project2015To2017Tests
 {
@@ -20,7 +22,7 @@ namespace Project2015To2017Tests
             var directoryInfo = new DirectoryInfo(".\\TestFiles");
             var doc = XDocument.Load("TestFiles\\fileinclusion.testcsproj");
 
-            await transformation.TransformAsync(doc, directoryInfo, project).ConfigureAwait(false);
+            await transformation.TransformAsync(doc, directoryInfo, project, SettingsFactory.Create()).ConfigureAwait(false);
 
             Assert.AreEqual(5, project.ItemsToInclude.Count);
 

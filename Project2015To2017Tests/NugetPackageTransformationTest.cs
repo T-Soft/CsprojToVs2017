@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Project2015To2017.Transformations;
+using Project2015To2017Tests.Helpers;
 
 namespace Project2015To2017Tests
 {
@@ -28,7 +29,7 @@ namespace Project2015To2017Tests
                 Description = "description from assembly",
                 Company = "assembly author"
             };
-            await new NugetPackageTransformation().TransformAsync(doc, directoryInfo, project).ConfigureAwait(false);
+            await new NugetPackageTransformation().TransformAsync(doc, directoryInfo, project, SettingsFactory.Create()).ConfigureAwait(false);
 
             Assert.IsNull(project.PackageConfiguration.Id);
             Assert.IsNull(project.PackageConfiguration.Version);
@@ -54,7 +55,7 @@ namespace Project2015To2017Tests
                 new PackageReference { Id = "Newtonsoft.Json", Version = "10.0.2" },
                 new PackageReference { Id = "Other.Package", Version = "1.0.2" }
             };
-            await new NugetPackageTransformation().TransformAsync(doc, directoryInfo, project).ConfigureAwait(false);
+            await new NugetPackageTransformation().TransformAsync(doc, directoryInfo, project, SettingsFactory.Create()).ConfigureAwait(false);
 
             Assert.AreEqual("[10.0.2,11)", project.PackageReferences.Single(x => x.Id == "Newtonsoft.Json").Version);
             Assert.AreEqual("1.0.2", project.PackageReferences.Single(x => x.Id == "Other.Package").Version);

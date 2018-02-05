@@ -2,22 +2,23 @@
 using Project2015To2017;
 using System.Collections.Generic;
 using Project2015To2017.Transformations;
+using Project2015To2017Tests.Helpers;
 
 namespace Project2015To2017Tests
 {
-    [TestClass]
-    public class RemovePackageAssemblyReferencesTransformationTest
-    {
-        [TestMethod]
-        public void HandlesNoPackagesConfig()
-        {
-            var project = new Project2015To2017.Definition.Project();
+	[TestClass]
+	public class RemovePackageAssemblyReferencesTransformationTest
+	{
+		[TestMethod]
+		public void HandlesNoPackagesConfig()
+		{
+			var project = new Project2015To2017.Definition.Project();
 
-            var transformation = new RemovePackageAssemblyReferencesTransformation();
-            transformation.TransformAsync(null, null, project);
-        }
+			var transformation = new RemovePackageAssemblyReferencesTransformation();
+			transformation.TransformAsync(null, null, project, SettingsFactory.Create());
+		}
 
-        [TestMethod]
+		[TestMethod]
 		public void DedupeReferencesFromPackages()
 		{
 			var project = new Project2015To2017.Definition.Project
@@ -49,9 +50,9 @@ namespace Project2015To2017Tests
 			};
 
 			var transformation = new RemovePackageAssemblyReferencesTransformation();
-			transformation.TransformAsync(null, null, project);
+			transformation.TransformAsync(null, null, project, SettingsFactory.Create());
 
 			Assert.AreEqual(2, project.AssemblyReferences.Count);
 		}
-    }
+	}
 }

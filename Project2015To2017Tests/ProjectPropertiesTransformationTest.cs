@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Project2015To2017.Definition;
 using System;
 using Project2015To2017.Transformations;
+using Project2015To2017Tests.Helpers;
 
 namespace Project2015To2017Tests
 {
@@ -318,7 +319,7 @@ namespace Project2015To2017Tests
 			var transformation = new ProjectPropertiesTransformation();
 
 			var project = new Project();
-			await transformation.TransformAsync(document, null, project).ConfigureAwait(false);
+			await transformation.TransformAsync(document, null, project, SettingsFactory.Create()).ConfigureAwait(false);
 			return project;
 		}
 	}
