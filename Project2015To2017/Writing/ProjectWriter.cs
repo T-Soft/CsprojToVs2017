@@ -217,7 +217,7 @@ namespace Project2015To2017.Writing
 			}
 
 			XElement[] childNodes = null;
-			if (!_settings.IsUseAssemblyInfoFile)
+			if (_settings.IsUseAssemblyInfoFile)
 			{
 				var attributes = new[]
 				{
