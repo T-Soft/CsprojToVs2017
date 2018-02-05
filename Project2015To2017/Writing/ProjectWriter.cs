@@ -33,6 +33,11 @@ namespace Project2015To2017.Writing
 
 			projectNode.Add(GetMainPropertyGroup(project, outputFile));
 
+			if (_settings.IsUseVsPsccFileToConfigureVersionControl)
+			{
+				projectNode.Add(GetSourceControlConfigurationNode());
+			}
+
 			if (project.ConditionalPropertyGroups != null)
 			{
 				projectNode.Add(project.ConditionalPropertyGroups.Select(RemoveAllNamespaces));
@@ -99,7 +104,7 @@ namespace Project2015To2017.Writing
 
 			return projectNode;
 		}
-
+		
 		private XElement MakeAssemblyReference(AssemblyReference assemblyReference)
 		{
 			var output = new XElement("Reference", new XAttribute("Include", assemblyReference.Include));
@@ -180,7 +185,7 @@ namespace Project2015To2017.Writing
 
 			AddAssemblyAttributeNodes(mainPropertyGroup, project.AssemblyAttributes);
 			AddPackageNodes(mainPropertyGroup, project.PackageConfiguration, project.AssemblyAttributes);
-
+			
 			return mainPropertyGroup;
 		}
 
@@ -254,6 +259,23 @@ namespace Project2015To2017.Writing
 				mainPropertyGroup.Add(childNodes);
 			}
 			
+		}
+
+		private XElement GetSourceControlConfigurationNode()
+		{
+			var scPropertyGroup = new XElement("PropertyGroup", new XAttribute("Label", "Globals"));
+			/*
+			<SccProjectName>SAK</SccProjectName>
+			<SccProvider>SAK</SccProvider>
+			<SccAuxPath>SAK</SccAuxPath>
+			<SccLocalPath>SAK</SccLocalPath>
+			*/
+			AddIfNotNull(scPropertyGroup, "SccProjectName", "SAK");
+			AddIfNotNull(scPropertyGroup, "SccProvider", "SAK");
+			AddIfNotNull(scPropertyGroup, "SccAuxPath", "SAK");
+			AddIfNotNull(scPropertyGroup, "SccLocalPath", "SAK");
+
+			return scPropertyGroup;
 		}
 
 		private void AddIfNotNull(XElement node, string elementName, string value)

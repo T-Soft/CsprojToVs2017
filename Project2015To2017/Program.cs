@@ -106,6 +106,10 @@ namespace Project2015To2017
 
 			var fileInfo = new FileInfo(filePath);
 			var directory = fileInfo.Directory;
+
+			string vsPsccFilePath = fileInfo.FullName + ".vspscc";
+			_settings.IsUseVsPsccFileToConfigureVersionControl = File.Exists(vsPsccFilePath);
+
 			Task.WaitAll(_transformationsToApply.Select(
 					t => t.TransformAsync(xmlDocument, directory, projectDefinition, _settings))
 				.ToArray());

@@ -10,5 +10,6 @@ namespace Project2015To2017
 	{
 		public bool IsMigrateToNetStandard { set; get; }
 		public bool IsUseAssemblyInfoFile { set; get; }
+		public bool IsUseVsPsccFileToConfigureVersionControl { set; get; }
 	}
 }
