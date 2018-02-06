@@ -35,7 +35,7 @@ namespace Project2015To2017
 			{
 				Console.WriteLine($"Please specify a project file or a solution directory.");
 				Console.WriteLine("Usage example :");
-				Console.WriteLine("Project2015To2017.exe <.csproj file or solution directory> [--netstandard | --std] [--assemblyinfo | --ainf]");
+				Console.WriteLine("Project2015To2017.exe <.csproj file or solution directory> [--netstandard | -s] [--assemblyinfo | -a] [--versions | -v]");
 				return;
 			}
 
@@ -70,8 +70,9 @@ namespace Project2015To2017
 		{
 			Settings ret = new Settings
 			{
-				IsMigrateToNetStandard = args.FirstOrDefault(a => a == "--netstandard" || a == "--std") != null,
-				IsUseAssemblyInfoFile = args.FirstOrDefault(a => a == "--assemblyinfo" || a== "--ainf") != null,
+				IsMigrateToNetStandard = args.FirstOrDefault(a => a == "--netstandard" || a == "-s") != null,
+				IsUseAssemblyInfoFile = args.FirstOrDefault(a => a == "--assemblyinfo" || a== "-a") != null,
+				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
 			};
 			
 			return ret;

@@ -246,7 +246,7 @@ namespace Project2015To2017.Writing
 			}
 			else
 			{
-				childNodes = assemblyAttributes.GetAttributes().Where(kv => !string.IsNullOrEmpty(kv.Value))
+				childNodes = assemblyAttributes.GetAttributes(_settings.IsGenerateVersionsElements).Where(kv => !string.IsNullOrEmpty(kv.Value))
 					.Select(kv => new XElement(kv.Key, kv.Value)).ToArray();
 			}
 

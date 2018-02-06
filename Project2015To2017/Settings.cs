@@ -11,5 +11,13 @@ namespace Project2015To2017
 		public bool IsMigrateToNetStandard { set; get; }
 		public bool IsUseAssemblyInfoFile { set; get; }
 		public bool IsUseVsPsccFileToConfigureVersionControl { set; get; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsGenerateVersionsElements { set; get; }
 	}
 }
