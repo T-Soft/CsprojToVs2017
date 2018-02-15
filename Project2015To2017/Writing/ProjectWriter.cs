@@ -165,6 +165,11 @@ namespace Project2015To2017.Writing
 
 			AddTargetFrameworks(mainPropertyGroup, project.TargetFrameworks);
 
+			if (_settings.IsEnableDefaultCompileItems)
+			{
+				AddIfNotNull(mainPropertyGroup, "EnableDefaultCompileItems", "false");
+			}
+
 			AddIfNotNull(mainPropertyGroup, "Optimize", project.Optimize ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "TreatWarningsAsErrors", project.TreatWarningsAsErrors ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "RootNamespace", project.RootNamespace != Path.GetFileNameWithoutExtension(outputFile.Name) ? project.RootNamespace : null);

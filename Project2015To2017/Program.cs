@@ -38,7 +38,7 @@ namespace Project2015To2017
 				Console.WriteLine(
 					"Project2015To2017.exe <.csproj file or solution directory> "
 					+ "[--netstandard | -s] [--assemblyinfo | -a] [--versions | -v] "
-					+ "[--del_old | -d] [--del_tfs_settings | -t]");
+					+ "[--del_old | -d] [--del_tfs_settings | -t] [--compile_items | -c]");
 				return;
 			}
 
@@ -77,7 +77,8 @@ namespace Project2015To2017
 				IsUseAssemblyInfoFile = args.FirstOrDefault(a => a == "--assemblyinfo" || a== "-a") != null,
 				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
 				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-d") != null,
-				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null
+				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
+				IsEnableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null
 			};
 			
 			return ret;

@@ -13,6 +13,7 @@ namespace Project2015To2017
 		public bool IsUseVsPsccFileToConfigureVersionControl { set; get; }
 		public bool IsDeleteOldFilesExceptProject { set; get; }
 		public bool IsDeleteTfsSettingsFile { set; get; }
+		public bool IsEnableDefaultCompileItems { set; get; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write.
