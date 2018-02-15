@@ -35,7 +35,10 @@ namespace Project2015To2017
 			{
 				Console.WriteLine($"Please specify a project file or a solution directory.");
 				Console.WriteLine("Usage example :");
-				Console.WriteLine("Project2015To2017.exe <.csproj file or solution directory> [--netstandard | -s] [--assemblyinfo | -a] [--versions | -v]");
+				Console.WriteLine(
+					"Project2015To2017.exe <.csproj file or solution directory> "
+					+ "[--netstandard | -s] [--assemblyinfo | -a] [--versions | -v] "
+					+ "[--del_old | -d] [--del_tfs_settings | -t]");
 				return;
 			}
 
@@ -73,6 +76,9 @@ namespace Project2015To2017
 				IsMigrateToNetStandard = args.FirstOrDefault(a => a == "--netstandard" || a == "-s") != null,
 				IsUseAssemblyInfoFile = args.FirstOrDefault(a => a == "--assemblyinfo" || a== "-a") != null,
 				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
+				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-l") != null,
+				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
+
 			};
 			
 			return ret;
@@ -109,6 +115,12 @@ namespace Project2015To2017
 			var directory = fileInfo.Directory;
 
 			string vsPsccFilePath = fileInfo.FullName + ".vspscc";
+
+			if (_settings.IsDeleteTfsSettingsFile)
+			{
+				File.Delete(vsPsccFilePath);
+			}
+
 			_settings.IsUseVsPsccFileToConfigureVersionControl = File.Exists(vsPsccFilePath);
 
 			Task.WaitAll(_transformationsToApply.Select(
@@ -126,7 +138,7 @@ namespace Project2015To2017
 			var packagesFile = Path.Combine(fileInfo.DirectoryName, "packages.config");
 			if (File.Exists(packagesFile))
 			{
-				if (!RenameFile(packagesFile))
+				if (!RenameFile(packagesFile, _settings.IsDeleteOldFilesExceptProject))
 				{
 					return;
 				}
@@ -137,13 +149,13 @@ namespace Project2015To2017
 				var assemblyInfoFile = Path.Combine(fileInfo.DirectoryName, "Properties", "AssemblyInfo.cs");
 				if (File.Exists(assemblyInfoFile))
 				{
-					if (!RenameFile(assemblyInfoFile))
+					if (!RenameFile(assemblyInfoFile, _settings.IsDeleteOldFilesExceptProject))
 					{
 						return;
 					}
 				}
 			}
-
+			
 			new ProjectWriter(_settings).Write(projectDefinition, fileInfo);
 		}
 
@@ -182,7 +194,7 @@ namespace Project2015To2017
 			return output;
 		}
 
-		private static bool RenameFile(string filename)
+		private static bool RenameFile(string filename, bool isDeleteInsteadOfRenaming = false)
 		{
 			var output = false;
 
@@ -193,9 +205,23 @@ namespace Project2015To2017
 			}
 			else
 			{
-				// todo Consider using TF VC or Git?
-				File.Move(filename, filename + ".old");
-				output = true;
+				if (isDeleteInsteadOfRenaming)
+				{
+					File.Delete(filename);
+
+					var dirPath = Path.GetDirectoryName(filename);
+					DirectoryInfo di = new DirectoryInfo(dirPath);
+					if (!di.EnumerateDirectories().Any()
+						&& !di.EnumerateFiles().Any())
+					{
+						di.Delete();
+					}
+				}
+				else
+				{
+					File.Move(filename, filename + ".old");
+					output = true;
+				}
 			}
 
 			return output;

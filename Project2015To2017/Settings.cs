@@ -11,6 +11,8 @@ namespace Project2015To2017
 		public bool IsMigrateToNetStandard { set; get; }
 		public bool IsUseAssemblyInfoFile { set; get; }
 		public bool IsUseVsPsccFileToConfigureVersionControl { set; get; }
+		public bool IsDeleteOldFilesExceptProject { set; get; }
+		public bool IsDeleteTfsSettingsFile { set; get; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write.
