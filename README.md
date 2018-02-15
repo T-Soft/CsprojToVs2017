@@ -4,7 +4,7 @@ With the introduction of Visual Studio 2017, Microsoft added some optimizations 
 This project converts an existing csproj to the new format, shortening the project file and using all the nice new features that are part of Visual Studio 2017.
 
 ## What does it fix?
-There are a number of things [that VS2017 handles differently](http://www.natemcmaster.com/blog/2017/03/09/vs2015-to-vs2017-upgrade/) that are performed by this tool: 
+There are a number of things [that new project system handles differently](https://docs.microsoft.com/en-us/dotnet/core/migration/#migration-from-earlier-net-core-csproj-formats-to-rtm-csproj) that are performed by this tool: 
 1. Include files using a wildcard as opposed to specifying every single file 
 2. A more succinct way of defining project references 
 3. A more succinct way of handling NuGet package references
