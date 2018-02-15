@@ -14,7 +14,7 @@ There are a number of things [that VS2017 handles differently](http://www.natemc
 7. <Compile Include=""> nodes no longer have to be specified
 8. Optionally migrate to netstandard 2.0 (see switches below)
 
-## How it works
+## How does it work
 Using the tool is simple, it is a simple command line utility that has a single argument (as well as some optional switches see below) being the project file you would like to convert.
 You can also give a directory path and the tool will discover all csproj files nested in it.
 
