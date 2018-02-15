@@ -76,9 +76,8 @@ namespace Project2015To2017
 				IsMigrateToNetStandard = args.FirstOrDefault(a => a == "--netstandard" || a == "-s") != null,
 				IsUseAssemblyInfoFile = args.FirstOrDefault(a => a == "--assemblyinfo" || a== "-a") != null,
 				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
-				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-l") != null,
-				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
-
+				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-d") != null,
+				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null
 			};
 			
 			return ret;
