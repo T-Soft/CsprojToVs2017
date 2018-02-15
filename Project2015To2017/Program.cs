@@ -133,6 +133,8 @@ namespace Project2015To2017
 			{
 				return;
 			}
+			
+			new ProjectWriter(_settings).Write(projectDefinition, fileInfo);
 
 			var packagesFile = Path.Combine(fileInfo.DirectoryName, "packages.config");
 			if (File.Exists(packagesFile))
@@ -154,8 +156,6 @@ namespace Project2015To2017
 					}
 				}
 			}
-			
-			new ProjectWriter(_settings).Write(projectDefinition, fileInfo);
 		}
 
 		internal static bool Validate(FileInfo file)
@@ -215,6 +215,8 @@ namespace Project2015To2017
 					{
 						di.Delete();
 					}
+
+					output = true;
 				}
 				else
 				{
