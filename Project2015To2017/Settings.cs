@@ -51,12 +51,12 @@ namespace Project2015To2017
 		public bool IsDeleteTfsSettingsFile { set; get; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether the Compile items definitions from old project file should be automatically generated instead of being explicitly manually included as-is.
+		/// Gets or sets a value indicating whether the Compile items definitions from old project file should be included as-is instead of being automatically generated.
 		/// </summary>
 		/// <value>
-		///   <c>true</c> if Compile items definitions from old project file should be automatically generated instead of being explicitly manually included as-is.; otherwise, <c>false</c>.
+		///   <c>true</c> if the Compile items definitions from old project file should be included as-is instead of being automatically generated.; otherwise, <c>false</c>.
 		/// </value>
-		public bool IsEnableDefaultCompileItems { set; get; }
+		public bool IsDisableDefaultCompileItems { set; get; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write.

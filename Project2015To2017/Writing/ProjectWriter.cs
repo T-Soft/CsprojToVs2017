@@ -165,7 +165,7 @@ namespace Project2015To2017.Writing
 
 			AddTargetFrameworks(mainPropertyGroup, project.TargetFrameworks);
 
-			if (_settings.IsEnableDefaultCompileItems)
+			if (_settings.IsDisableDefaultCompileItems)
 			{
 				AddIfNotNull(mainPropertyGroup, "EnableDefaultCompileItems", "false");
 			}

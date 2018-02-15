@@ -39,9 +39,9 @@ namespace Project2015To2017.Transformations
 			// Remove packages.config since those references were already added to the CSProj file.
 			otherIncludes.Where(x => x.Attribute("Include")?.Value == "packages.config").Remove();
 
-			definition.ItemsToInclude = settings.IsEnableDefaultCompileItems
-				? otherIncludes.ToArray()
-				: compileManualIncludes.Concat(otherIncludes).ToArray();
+			definition.ItemsToInclude = settings.IsDisableDefaultCompileItems
+				? compileManualIncludes.Concat(otherIncludes).ToArray()
+				: otherIncludes.ToArray();
 			
 			return Task.CompletedTask;
 		}
