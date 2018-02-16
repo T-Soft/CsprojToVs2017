@@ -17,6 +17,11 @@ namespace Project2015To2017.Transformations
 			{
 				return;
 			}
+			if (string.IsNullOrEmpty(settings.SolutionDirectory))
+			{
+				return;
+			}
+
 			foreach (var packageRef in project.PackageReferences.ToArray())
 			{
 				var packageName = packageRef.Id;
@@ -27,6 +32,8 @@ namespace Project2015To2017.Transformations
 					continue;
 				}
 				
+				//string projectPath = projectInSolution.
+
 				//TODO
 
 				//project.PackageReferences.Remove(packageRef);

@@ -79,7 +79,39 @@ namespace Project2015To2017
 		}
 
 		#region Methods for reading settings
-		
+
+		private static string GetSoultionDirectory(string projectOrSoultionFolderPath)
+		{
+			string directoryName = Path.GetDirectoryName(projectOrSoultionFolderPath);
+			if (directoryName == null)
+			{
+				return null;
+			}
+
+			DirectoryInfo targetDirectory = new DirectoryInfo(directoryName);
+			var parentDirectory = targetDirectory.Parent;
+
+			if (Path.GetExtension(projectOrSoultionFolderPath) == ".csproj")
+			{
+				// try one level higher
+				if (parentDirectory == null)
+				{
+					return null;
+				}
+
+				var solutions = parentDirectory.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly);
+				return solutions.Any()
+					? parentDirectory.ToString()
+					: null;
+			}
+
+			if (targetDirectory.EnumerateFiles("*.sln", SearchOption.TopDirectoryOnly).Any())
+			{
+				return targetDirectory.ToString();
+			}
+			return null;
+		}
+
 		private static Settings ReadSettings(string[] args)
 		{
 			Settings ret = new Settings
@@ -91,7 +123,9 @@ namespace Project2015To2017
 				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
 				IsDisableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null,
 				IsReplacePackageReferencesWithProjectReferences = args.FirstOrDefault(a => a == "--project_references" || a == "-r") != null,
-				ProjectsInSolution = ReadProjectsFromSolution(args[0])
+				
+				ProjectsInSolution = ReadProjectsFromSolution(args[0]),
+				SolutionDirectory = GetSoultionDirectory(args[0])
 			};
 			
 			return ret;
@@ -104,11 +138,11 @@ namespace Project2015To2017
 				throw new ArgumentNullException(nameof(path));
 			}
 
-			string solutionDirectory = path;
+			string solutionDirectory = GetSoultionDirectory(path);
 
-			if (Path.GetExtension(path) == ".csproj")
+			if (string.IsNullOrEmpty(solutionDirectory))
 			{
-				solutionDirectory = Path.GetDirectoryName(path);
+				return new HashSet<(string projectFileName, string projectName)>();
 			}
 
 			return new HashSet<(string projectFileName, string projectName)>(
