@@ -15,6 +15,9 @@ namespace Project2015To2017
 {
 	class Program
 	{
+
+		#region Props
+
 		private static readonly IReadOnlyList<ITransformation> _transformationsToApply = new ITransformation[]
 		{
 			new ProjectPropertiesTransformation(),
@@ -29,6 +32,12 @@ namespace Project2015To2017
 
 		private static Settings _settings;
 
+		#endregion
+
+		/// <summary>
+		/// Entry point.
+		/// </summary>
+		/// <param name="args">The arguments.</param>
 		static void Main(string[] args)
 		{
 			if (args.Length == 0)
@@ -38,16 +47,18 @@ namespace Project2015To2017
 				Console.WriteLine(
 					"Project2015To2017.exe <.csproj file or solution directory> "
 					+ "[--netstandard | -s] [--assemblyinfo | -a] [--versions | -v] "
-					+ "[--del_old | -d] [--del_tfs_settings | -t] [--compile_items | -c]");
+					+ "[--del_old | -d] [--del_tfs_settings | -t] [--compile_items | -c] [--project_references | -p]");
 				return;
 			}
 
 			_settings = ReadSettings(args);
 
-			// Process all csprojs found in given directory
-			if (Path.GetExtension(args[0]) != ".csproj")
+			var projectFileOrSolutionFolder = args[0];
+			
+			// Process all csproj files found in given directory and subderictories
+			if (Path.GetExtension(projectFileOrSolutionFolder) != ".csproj")
 			{
-				var projectFiles = Directory.EnumerateFiles(args[0], "*.csproj", SearchOption.AllDirectories).ToArray();
+				var projectFiles = _settings.ProjectsInSolution.Select(p => p.projectFileName).ToArray();
 				if (projectFiles.Length == 0)
 				{
 					Console.WriteLine($"Please specify a project file or a solution directory.");
@@ -64,11 +75,11 @@ namespace Project2015To2017
 			}
 
 			// Process only the given project file
-			ProcessFile(args[0]);
+			ProcessFile(projectFileOrSolutionFolder);
 		}
 
 		#region Methods for reading settings
-
+		
 		private static Settings ReadSettings(string[] args)
 		{
 			Settings ret = new Settings
@@ -78,10 +89,32 @@ namespace Project2015To2017
 				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
 				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-d") != null,
 				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
-				IsDisableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null
+				IsDisableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null,
+				IsReplacePackageReferencesWithProjectReferences = args.FirstOrDefault(a => a == "--project_references" || a == "-r") != null,
+				ProjectsInSolution = ReadProjectsFromSolution(args[0])
 			};
 			
 			return ret;
+		}
+
+		private static HashSet<(string projectFileName, string projectName)> ReadProjectsFromSolution(string path)
+		{
+			if (path == null)
+			{
+				throw new ArgumentNullException(nameof(path));
+			}
+
+			string solutionDirectory = path;
+
+			if (Path.GetExtension(path) == ".csproj")
+			{
+				solutionDirectory = Path.GetDirectoryName(path);
+			}
+
+			return new HashSet<(string projectFileName, string projectName)>(
+				Directory.EnumerateFiles(solutionDirectory, "*.csproj", SearchOption.AllDirectories)
+					.Select(f => (f, Path.GetFileNameWithoutExtension(f)))
+			);
 		}
 
 		#endregion
@@ -128,6 +161,8 @@ namespace Project2015To2017
 				.ToArray());
 
 			AssemblyReferenceTransformation.RemoveExtraAssemblyReferences(projectDefinition);
+
+			PostprocessingTransformation.ChangePackageReferencesToProjectReferences(projectDefinition, _settings);
 
 			var projectFile = fileInfo.FullName;
 			if (!SaveBackup(projectFile))
