@@ -1,2 +1,0 @@
-Find: PackageReference Include="([^"]+)"[^/>]+
-Repl: ProjectReference Include="..\\$1\\$1.csproj"

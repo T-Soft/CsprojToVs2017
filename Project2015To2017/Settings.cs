@@ -65,31 +65,5 @@ namespace Project2015To2017
 		///   <c>true</c> if <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write; otherwise, <c>false</c>.
 		/// </value>
 		public bool IsGenerateVersionsElements { set; get; }
-
-
-		/// <summary>
-		/// Gets or sets a value indicating whether package references should be replaced with project references for porjects in this solution.
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if package references should be replaced with project references for porjects in this solution; otherwise, <c>false</c>.
-		/// </value>
-		public bool IsReplacePackageReferencesWithProjectReferences { set; get; }
-
-
-		/// <summary>
-		/// Gets or sets all the project names in solution processed project is a part of.
-		/// </summary>
-		/// <value>
-		/// The projects in solution.
-		/// </value>
-		public HashSet<(string projectFileName, string projectName)> ProjectsInSolution { set; get; }
-
-		/// <summary>
-		/// Gets or sets the solution directory.
-		/// </summary>
-		/// <value>
-		/// The solution directory.
-		/// </value>
-		public string SolutionDirectory { set; get; }
 	}
 }
