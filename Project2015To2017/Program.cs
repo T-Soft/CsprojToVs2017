@@ -78,7 +78,8 @@ namespace Project2015To2017
 				IsGenerateVersionsElements = args.FirstOrDefault(a => a == "--versions" || a== "-v") != null,
 				IsDeleteOldFilesExceptProject = args.FirstOrDefault(a => a == "--del_old" || a== "-d") != null,
 				IsDeleteTfsSettingsFile = args.FirstOrDefault(a => a == "--del_tfs_settings" || a== "-t") != null,
-				IsDisableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null
+				IsDisableDefaultCompileItems = args.FirstOrDefault(a => a == "--compile_items" || a== "-c") != null,
+				IsDisableDefaultContentItems = args.FirstOrDefault(a => a == "--content_items" || a== "-o") != null
 			};
 			
 			return ret;

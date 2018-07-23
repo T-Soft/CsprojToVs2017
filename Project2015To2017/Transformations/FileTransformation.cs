@@ -23,7 +23,8 @@ namespace Project2015To2017.Transformations
 			"DesignData",
 			"DesignDataWithDesignTimeCreatableTypes",
 			"EntityDeploy",
-			"XamlAppDef"
+			"XamlAppDef",
+			"WCFMetadata"
 		};
 
 		public Task TransformAsync(XDocument projectFile, DirectoryInfo projectFolder, Project definition, Settings settings)
@@ -38,6 +39,12 @@ namespace Project2015To2017.Transformations
 
 			// Remove packages.config since those references were already added to the CSProj file.
 			otherIncludes.Where(x => x.Attribute("Include")?.Value == "packages.config").Remove();
+
+			if (!settings.IsDisableDefaultContentItems)
+			{
+				// Remove "Content" includes as these are included in csproj by default
+				otherIncludes.Where(x => x.Name.LocalName == "Content").Remove();
+			}
 
 			definition.ItemsToInclude = settings.IsDisableDefaultCompileItems
 				? compileManualIncludes.Concat(otherIncludes).ToArray()

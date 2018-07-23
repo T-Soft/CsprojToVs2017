@@ -65,5 +65,13 @@ namespace Project2015To2017
 		///   <c>true</c> if <c>Version</c> and <c>FileVersion</c> Property nodes should be generated during poject write; otherwise, <c>false</c>.
 		/// </value>
 		public bool IsGenerateVersionsElements { set; get; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether <c>EnableDefaultContentItems</c> node should be generated with <c>false</c> value or not generated at all.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if <c>EnableDefaultContentItems</c> should be generated with <c>false</c> value; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsDisableDefaultContentItems { set; get; }
 	}
 }

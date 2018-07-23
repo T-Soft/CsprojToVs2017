@@ -29,7 +29,13 @@ namespace Project2015To2017.Writing
 
 		internal XElement CreateXml(Project project, FileInfo outputFile)
 		{
-			var projectNode = new XElement("Project", new XAttribute("Sdk", "Microsoft.NET.Sdk"));
+			var projectNode = new XElement("Project");
+
+			projectNode.SetAttributeValue(
+				"Sdk",
+				project.Type == ApplicationType.WebApplication
+					? "Microsoft.NET.Sdk.Web"
+					: "Microsoft.NET.Sdk");
 
 			projectNode.Add(GetMainPropertyGroup(project, outputFile));
 
@@ -170,6 +176,11 @@ namespace Project2015To2017.Writing
 				AddIfNotNull(mainPropertyGroup, "EnableDefaultCompileItems", "false");
 			}
 
+			if (_settings.IsDisableDefaultContentItems)
+			{
+				AddIfNotNull(mainPropertyGroup, "EnableDefaultContentItems", "false");
+			}
+
 			AddIfNotNull(mainPropertyGroup, "Optimize", project.Optimize ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "TreatWarningsAsErrors", project.TreatWarningsAsErrors ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "RootNamespace", project.RootNamespace != Path.GetFileNameWithoutExtension(outputFile.Name) ? project.RootNamespace : null);
@@ -177,6 +188,7 @@ namespace Project2015To2017.Writing
 			AddIfNotNull(mainPropertyGroup, "AllowUnsafeBlocks", project.AllowUnsafeBlocks ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "SignAssembly", project.SignAssembly ? "true" : null);
 			AddIfNotNull(mainPropertyGroup, "AssemblyOriginatorKeyFile", project.AssemblyOriginatorKeyFile);
+			AddIfNotNull(mainPropertyGroup, "ApplicationInsightsResourceId", project.ApplicationInsightsResourceId);
 			
 			switch (project.Type)
 			{
@@ -185,6 +197,9 @@ namespace Project2015To2017.Writing
 					break;
 				case ApplicationType.WindowsApplication:
 					mainPropertyGroup.Add(new XElement("OutputType", "WinExe"));
+					break;
+				case ApplicationType.WebApplication:
+					mainPropertyGroup.Add(new XElement("OutputType", "Library"));
 					break;
 			}
 
